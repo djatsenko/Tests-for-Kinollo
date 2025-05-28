@@ -1,36 +1,33 @@
-🎮 Cinema Project – Automated Test Report
+# 🎮 Cinema Project – Automated Test Report
 
-This report describes the testing performed for our cinema web application project.Due to authentication restrictions (admin access requires secure cookies), we created a mini-version of the project, placed in the folder secretfolder, to implement and demonstrate automated testing independently.
+## 📝 Description
 
-✅ What We Tested
+This report describes the testing performed for our cinema web application project.
 
-🔹 1. Unit Tests (Jest)
-
-Located in: secretfolder/controllers/movieController.test.js
-
-Tested functions:
-
-getMovies() – returns a list of movies or an error on failure.
-
-deleteMovie() – deletes a movie by ID, handles "not found" and error cases.
+Due to authentication restrictions (admin access requires secure cookies), we created a mini-version of the project**, placed in the folder secretfolder, to implement and demonstrate automated testing independently.
 
 We used mocking to simulate PrismaClient methods and isolate logic.
 
-🔹 2. API Integration Tests (Jest + Supertest)
+---
 
-Located in: secretfolder/api.test.js
+## ✅ What We Tested
 
-Tested endpoints via a minimal Express app (secretfolder/app.js):
+### 🔹 Unit Tests (Jest)
 
-GET /api/movies – returns a mocked movie list.
+Tests isolated controller logic without a real database.
 
-DELETE /api/movies/:id – handles both success and not-found cases.
+### 🔹 API Integration Tests (Jest + Supertest)
 
-⚠️ Note About Admin Features
+Simulated HTTP requests using a minimal Express server.
 
-The full version of the cinema project protects admin functionality (like adding or deleting movies) behind HTTP-only authentication cookies.These cookies are not easily simulated in automated tests without a real login flow.Because of this, we extracted the logic into a separate testable folder called secretfolder, where the code structure and functionality mirror the real app, but run independently.
+### ⚠️ Admin Logic Note
 
-🛠 Tools Used
+The full version of the cinema project protects admin functionality (like adding or deleting movies) behind HTTP-only authentication cookies.
+These cookies are not easily simulated in automated tests without a real login flow.
+
+Because of this, we extracted the logic into a separate testable folder called secretfolder, where the code structure and functionality mirror the real app, but are run independently.
+
+## 🛠 Tools Used
 
 Jest – for unit and API tests
 
@@ -38,20 +35,42 @@ Supertest – for HTTP request simulation
 
 Express – for a minimal mock API server
 
-Node.js with mocked Prisma Client
+Node.js – with mocked Prisma Client
 
-📁 Project Structure
+## 📁 Project Structure
 
-repo-root/
-├── secretfolder/
-│   ├── controllers/
-│   │   ├── movieController.js           # App logic (copied from real backend)
-│   │   └── movieController.test.js      # Unit tests (Jest)
-│   ├── app.js                           # Minimal Express server
-│   ├── api.test.js                      # API tests (Supertest + Jest)
-│   ├── package.json                     # Test dependencies & scripts
-│   └── README.md                        # This report
+- /controllers/
+- ├── movieController.js             # Original controller logic (reference)
+- ├── movieController.test.js        # Unit tests for original controller
+- ├── package-lock.json
+- ├── package.json
 
-✅ Status
+- /node_modules/                    # Dependencies
 
-✔ All tests are passing✔ Code matches the real project structure✔ Ready for extension (e.g. POST, PUT, E2E)❗ Admin logic tested in isolation due to authentication
+### The Kinollo's code for tests
+- /secretfolder/
+- ├── bookingController.js           # Booking logic (copied from real app)
+- ├── Controller.test.js             # Unit tests for booking logic
+- ├── movieController.js             # Logic for movie operations
+
+- .gitignore                        # Git exclusions
+- api.test.js                       # API integration tests
+- app.js                            # Express server setup
+- package-lock.json
+- package.json
+- README.md                         # This test report
+
+## 📊 Status
+
+### ✅ All tests are passing
+
+### ✅ Code matches the real project structure
+
+### ✅ Ready for extension (e.g. POST, PUT, E2E)
+
+### ❗ Admin logic tested in isolation due to authentication
+
+## 👨‍💻 Author
+
+Name: Vladislav Djatsenko, Artemiy Vorozun, Kristofer Beljakov
+
